@@ -84,4 +84,7 @@ script:
     - if [ "$RUN_TESTS" = "true" -a "$WINE" = "true" ]; then wine  src/test/test_crowdcoin.exe; fi
     - if [ "$RUN_TESTS" = "true" ]; then qa/pull-tester/rpc-tests.py --coverage; fi
 after_script:
+    - find . -name 'crowdcoind' -a -mtime +1
+    - find . -name 'crowdcoin-cli' -a -mtime +1
+    - find . -name 'crowdcoin-tx' -a -mtime +1
     - if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then (echo "Upload goes here. Something like: scp -r $BASE_OUTDIR server" || echo "upload failed"); fi
